@@ -15,43 +15,20 @@
             <h1>Upcoming Game Events</h1>
         </header> <!-- /.page_header -->
 
-        <!-- events data -->
-        <div class="events_table">
-            <!--table header-->
-            <div class="events_table_header">
-                <ul class="table-row-content">
-                    <li class="table-cell datetime_cell"><span>Date</span></li>
-                    <li class="table-cell name_cell"><span>Name</span></li>
-                    <li class="table-cell place_cell"><span>City</span></li>
-                    <li class="table-cell place_cell"><span>State</span></li>
-                    <li class="table-cell datetime_cell"><span>Starts at</span></li>
-                    <li class="table-cell datetime_cell"><span>Local time</span></li>
-                    <li class="table-cell datetime_cell"><span>Start in</span></li>
-                </ul>
-            </div>
-            <!--events rows-->
-            <div class="events_table_rows">
-                <a class="table-row" data-ng-repeat="event in upcomingEvents | orderBy:sortType:sortReverse" data-ng-href="#!/upcomingEvents/{{event.event_id}}">
-                    <ul class="table-row-content">
-                        <li class="table-cell datetime_cell"><span>{{event.date_start | date:'MM/dd'}}</span></li>
-                        <li class="table-cell name_cell"><span>{{event.long_name}}</span></li>
-                        <li class="table-cell place_cell"><span>{{event.city}}</span></li>
-                        <li class="table-cell place_cell"><span>{{event.state}}</span></li>
-                        <li class="table-cell datetime_cell"><span>{{event.date_start | date:'shortTime'}}</span></li>
-                        <li class="table-cell datetime_cell"><span>{{event.localTime}}</span></li>
-                        <li class="table-cell datetime_cell"><span>{{event.startIn}}</span></li>
-                    </ul>
-                </a>
-            </div>
-        </div>
+        <div ng-view></div>
     </div>  <!-- /.wrapper -->
 
     <!-- Angular Javascript -->
     <script src="js/vendors/angular.min.js"></script>
+    <!-- Angular Route Javascript -->
+    <script src="js/vendors/angular-route.min.js"></script>
     <!-- Moment Javascript -->
     <script src="js/vendors/moment.min.js"></script>
+    <!-- Google maps Javascript-->
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="js/vendors/ng-map.min.js"></script>`
     <!-- Bootstrap Javascript -->
-    <script src="js/vendors/bootstrap.min.js"></script>
+    <!--<script src="js/vendors/bootstrap.min.js"></script>-->
     <!-- Our main.js -->
     <script src="js/main.js"></script>
 </body>

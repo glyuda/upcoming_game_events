@@ -11,14 +11,15 @@
             css: 'source/sass/**/*.scss',
             css_vendors: 'source/css/**/*.*',
             img: 'source/images/**/*.*',
-            js: 'source/js/**/*.js'
-
+            js: 'source/js/**/*.js',
+            templates: 'sourse/templates/*.*'
         },
         dest: {
             html: 'public',
             css: 'public/css',
             images: 'public/images',
-            js: 'public/js'
+            js: 'public/js',
+            templates: 'public/templates'
         }
     };
 //all tasks we can do
@@ -29,6 +30,7 @@
         gulp.run('cssVendorsMove');
         gulp.run('jsMove');
         gulp.run('imgMove');
+        gulp.run('tempMove');
 
         //all watchers
         gulp.watch(paths.src.html, function() {
@@ -41,7 +43,7 @@
 
         gulp.watch(paths.src.css_vendors, function() {
             gulp.run('cssVendorsMove');
-        })
+        });
 
         gulp.watch(paths.src.js, function() {
             gulp.run('jsMove');
@@ -50,7 +52,11 @@
         gulp.watch(paths.src.img, function() {
             gulp.run('imgMove');
         });
-    })
+
+        gulp.watch(paths.src.templates, function() {
+            gulp.run('tempMove');
+        });
+    });
 
     gulp.task('htmlMove', function() {
         gulp.src(paths.src.html)
@@ -60,8 +66,7 @@
     gulp.task('cssCreate', function() {
         gulp.src(paths.src.css)
             .pipe(sass())
-            .pipe(gulp.dest(paths.dest.css))
-        //.pipe(plugins.livereload());
+            .pipe(gulp.dest(paths.dest.css));
     });
 
     gulp.task('cssVendorsMove', function() {
@@ -77,5 +82,10 @@
     gulp.task('imgMove', function() {
         gulp.src(paths.src.img)
             .pipe(gulp.dest(paths.dest.images))
+    });
+
+    gulp.task('tempMove', function() {
+        gulp.src(paths.src.templates)
+            .pipe(gulp.dest(paths.dest.templates))
     })
 })();
