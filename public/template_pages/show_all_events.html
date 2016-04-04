@@ -14,7 +14,7 @@
     </div> <!-- /.events_table_header -->
     <!--events rows-->
     <div class="events_table_rows">
-        <a class="table-row" data-ng-repeat="event in upcomingEvents | orderBy:sortType:sortReverse" data-ng-href="#!/upcomingEvents/{{event.event_id}}">
+        <a ng-class="{current_event: event.thisWeek}" data-ng-repeat="event in upcomingEvents | orderBy:sortType:sortReverse" data-ng-href="#!/upcomingEvents/{{event.event_id}}" class="table-row">
             <ul class="table-row-content">
                 <li class="table-cell datetime_cell"><span>{{event.date_start | date:'MM/dd'}}</span></li>
                 <li class="table-cell name_cell"><span>{{event.long_name}}</span></li>

@@ -12,14 +12,14 @@
             css_vendors: 'source/css/**/*.*',
             img: 'source/images/**/*.*',
             js: 'source/js/**/*.js',
-            templates: 'sourse/templates/*.*'
+            tmpl: 'sourse/template_pages/*.*'
         },
         dest: {
             html: 'public',
             css: 'public/css',
             images: 'public/images',
             js: 'public/js',
-            templates: 'public/templates'
+            tmpl: 'public/template_pages'
         }
     };
 //all tasks we can do
@@ -85,7 +85,7 @@
     });
 
     gulp.task('tempMove', function() {
-        gulp.src(paths.src.templates)
-            .pipe(gulp.dest(paths.dest.templates))
+        gulp.src(paths.src.tmpl)
+            .pipe(gulp.dest(paths.dest.tmpl))
     })
 })();

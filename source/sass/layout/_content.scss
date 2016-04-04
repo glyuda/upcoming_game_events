@@ -1,9 +1,15 @@
+.current_event {
+  color: red;
+}
+
 .wrapper {
   padding: 20px;
 
   .page_header {
 
   }
+
+
 
   .events_table {
     border-top: 1px solid #ddd;
@@ -44,8 +50,8 @@
     .table-cell {
       display: table-cell;
       padding: 10px 20px;
-
     }
+
     .datetime_cell {
       width: 8%;
     }

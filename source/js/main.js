@@ -9,12 +9,12 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
 .config(function($routeProvider) {
     $routeProvider
         .when('/', { //main table with events
-            templateUrl: 'templates/show_all_events.html',
+            templateUrl: 'template_pages/show_all_events.html',
             controller: 'upcomingEventsCtrl'
         })
 
         .when('/!/upcomingEvents/:eventId', { //detail information about some event
-            templateUrl: 'templates/show_event.html',
+            templateUrl: 'template_pages/show_event.html',
             controller: 'showEventCtrl'
         })
 })
@@ -35,11 +35,11 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
 
         angular.forEach(processedEvents, function(item) {
             item.localTime = moment().format('hh:mm A');
-            item.startIn = moment(item.date_start).fromNow();
+            item.startIn = moment(item.date_start).fromNow(true);
 
             //highlight events of this week with eventWeek=true
             eventWeek = moment(item.date_start).week();
-            item.thisWeek = (eventWeek = moment().week()) ? false : true;
+            item.thisWeek = (eventWeek == moment().week()) ? true : false;
         });
 
         return processedEvents;
