@@ -7,19 +7,17 @@
 //all paths we use
     var paths = {
         src: {
-            html: 'source/*.html',
+            html: 'source/**/*.html',
             css: 'source/sass/**/*.scss',
             css_vendors: 'source/css/**/*.*',
             img: 'source/images/**/*.*',
-            js: 'source/js/**/*.js',
-            tmpl: 'sourse/template_pages/*.*'
+            js: 'source/js/**/*.js'
         },
         dest: {
             html: 'public',
             css: 'public/css',
             images: 'public/images',
-            js: 'public/js',
-            tmpl: 'public/template_pages'
+            js: 'public/js'
         }
     };
 //all tasks we can do
@@ -30,7 +28,6 @@
         gulp.run('cssVendorsMove');
         gulp.run('jsMove');
         gulp.run('imgMove');
-        gulp.run('tempMove');
 
         //all watchers
         gulp.watch(paths.src.html, function() {
@@ -51,10 +48,6 @@
 
         gulp.watch(paths.src.img, function() {
             gulp.run('imgMove');
-        });
-
-        gulp.watch(paths.src.templates, function() {
-            gulp.run('tempMove');
         });
     });
 
@@ -83,9 +76,4 @@
         gulp.src(paths.src.img)
             .pipe(gulp.dest(paths.dest.images))
     });
-
-    gulp.task('tempMove', function() {
-        gulp.src(paths.src.tmpl)
-            .pipe(gulp.dest(paths.dest.tmpl))
-    })
 })();

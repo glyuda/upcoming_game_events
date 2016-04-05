@@ -76,6 +76,11 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
     }).
     error(function (data, status, headers, config) {
         // log error
-    })
+    });
+
+    $scope.$back = function() {
+        window.history.back();
+    };
 
 });
+
