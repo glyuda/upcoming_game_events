@@ -24,7 +24,8 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
     //get only actual events
     function filterEvents(data, start_date) {
         var filteredEvents = data.filter(function(item) {
-            return start_date <= moment(item.date_start).format('YYYY MM DD');
+            moment.tz.setDefault(item.timezone);  //set the default timezone to event's timezone
+            return start_date <= moment.tz(item.date_start, 'UTC').format('YYYY MM DD');
         });
         return filteredEvents;
     };
@@ -34,12 +35,18 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
         var eventWeek;
 
         angular.forEach(processedEvents, function(item) {
+            moment.tz.setDefault(item.timezone);  //set the default timezone to event's timezone
+            item.date_start = moment.tz(item.date_start, 'UTC');
+            item.startsAt = item.date_start.format('hh:mm A');
             item.localTime = moment().format('hh:mm A');
-            item.startIn = moment(item.date_start).fromNow(true);
+            item.startIn = item.date_start.fromNow(true);
 
             //highlight events of this week with eventWeek=true
-            eventWeek = moment(item.date_start).week();
+            eventWeek = item.date_start.week();
             item.thisWeek = (eventWeek == moment().week()) ? true : false;
+
+            item.date_start = item.date_start.format('MM/DD');
+
         });
 
         return processedEvents;
@@ -71,6 +78,9 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
     $http.get('https://events.sportwrench.com/api/esw/events').
     success(function (data, status, headers, config) {
         $scope.event_details = getOurEvent(data, $routeParams.eventId);
+        moment.tz.setDefault($scope.event_details[0].timezone); //set the default timezone to event's timezone
+        $scope.event_details[0].date_start = moment.tz($scope.event_details[0].date_start, 'UTC').format('MM/DD/YYYY HH:mm A');
+        $scope.event_details[0].date_end = moment.tz($scope.event_details[0].date_end, 'UTC').format('MM/DD/YYYY HH:mm A');
         $log.debug('Got only event with event_id: ' + $routeParams.eventId);
         $log.debug($scope.event_details);
     }).
@@ -81,6 +91,5 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
     $scope.$back = function() {
         window.history.back();
     };
-
 });
 
