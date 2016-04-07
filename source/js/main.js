@@ -79,8 +79,8 @@ angular.module('upcomingEventsApp', ['ngRoute', 'ngMap'])
     success(function (data, status, headers, config) {
         $scope.event_details = getOurEvent(data, $routeParams.eventId);
         moment.tz.setDefault($scope.event_details[0].timezone); //set the default timezone to event's timezone
-        $scope.event_details[0].date_start = moment.tz($scope.event_details[0].date_start, 'UTC').format('MM/DD/YYYY HH:mm A');
-        $scope.event_details[0].date_end = moment.tz($scope.event_details[0].date_end, 'UTC').format('MM/DD/YYYY HH:mm A');
+        $scope.event_details[0].date_start = moment.tz($scope.event_details[0].date_start, 'UTC').format('MM/DD/YYYY HH:mm');
+        $scope.event_details[0].date_end = moment.tz($scope.event_details[0].date_end, 'UTC').format('MM/DD/YYYY HH:mm');
         $log.debug('Got only event with event_id: ' + $routeParams.eventId);
         $log.debug($scope.event_details);
     }).
